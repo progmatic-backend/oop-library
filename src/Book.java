@@ -3,10 +3,10 @@ import java.util.List;
 public class Book {
     private final String title;
     private final int publicationYear;
-    private final String genre; // enum
+    private final Genre genre;
     private final List<Author> authors;
 
-    public Book(String title, int publicationYear, String genre, List<Author> authors) {
+    public Book(String title, int publicationYear, Genre genre, List<Author> authors) {
         this.title = title;
         this.publicationYear = publicationYear;
         this.genre = genre;
@@ -21,7 +21,7 @@ public class Book {
         return publicationYear;
     }
 
-    public String getGenre() {
+    public Genre getGenre() {
         return genre;
     }
 
