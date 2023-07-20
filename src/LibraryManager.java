@@ -18,7 +18,7 @@ public class LibraryManager {
                 List.of(new Author("George Orwell"), new Author("Soros György")));
         Book konyv3 = new Book("Ez veszélyes", 2018, Genre.SCI_FI,
                 List.of(new Author("Soros György"), new Author("Soros Bérenc")));
-        konyvtar.addBook(konyv);
+        konyvtar.addBook(konyv, 10);
         konyvtar.addBook(konyv2);
         konyvtar.addBook(konyv3);
 

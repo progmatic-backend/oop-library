@@ -1,18 +1,14 @@
-import java.util.ArrayList;
-
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Library {
 
-    // TODO
-    // private Map<Book, Integer> bookAmount;
 
-    private final List<Book> books;
+    private final Map<Book, Integer> bookCopies; // könyv --> db
+
     private final List<Reader> readers;
 
-    public List<Book> getBooks() {
-        return books;
+    public Set<Book> getBooks() {
+        return bookCopies.keySet();
     }
 
     public List<Reader> getReaders() {
@@ -20,12 +16,16 @@ public class Library {
     }
 
     public Library() {
-        this.books = new ArrayList<>();
         this.readers = new ArrayList<>();
+        this.bookCopies = new HashMap<>();
     }
 
     public void addBook(Book book) {
-        this.books.add(book);
+        this.bookCopies.put(book, bookCopies.getOrDefault(book, 0) + 1);
+    }
+
+    public void addBook(Book book, int amount) {
+        this.bookCopies.put(book, bookCopies.getOrDefault(book, 0) + amount);
     }
 
     public void addReader(Reader reader) {
@@ -35,7 +35,7 @@ public class Library {
 
     public List<Book> findBookByTitle(String title) {
         List<Book> result = new ArrayList<>();
-        for (Book book : books) {
+        for (Book book : bookCopies.keySet()) {
             if (book.getTitle().equalsIgnoreCase(title)) {
                 result.add(book);
             }
@@ -45,7 +45,7 @@ public class Library {
 
     public List<Book> findBookByGenre(Genre genre) {
         List<Book> result = new ArrayList<>();
-        for (Book book : books) {
+        for (Book book : bookCopies.keySet()) {
             if (book.getGenre() == genre) {
                 result.add(book);
             }
@@ -55,8 +55,8 @@ public class Library {
 
     public List<Book> findBooksByAuthor(String authorName) {
         List<Book> result = new ArrayList<>();
-        for (Book book : books) {
-            for (Author author: book.getAuthors()) {
+        for (Book book : bookCopies.keySet()) {
+            for (Author author : book.getAuthors()) {
                 if (author.getName().contains(authorName)) {
                     result.add(book);
                     break; // lehet, hogy több szerzője van, amire igaz a keresési feltétel -> csak 1x kerüljön bele
